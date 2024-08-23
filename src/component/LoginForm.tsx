@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface LoginFormProps {
   email: string;
@@ -19,12 +19,17 @@ const LoginForm: React.FC<LoginFormProps> = ({
   setRememberme,
   onSubmit,
 }) => {
-  const localEmail = localStorage.getItem('email');
+  const localEmail = localStorage.getItem('rememberedEmail');
+  const [rememberMie,setRemembermee] = useState(false);
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('rememberedEmail');
+    if (savedEmail) {
+      setEmail(savedEmail);
+      setRemembermee(true);
+    }
+  }, []);
   // const localChecked = localStorage.getItem('checked');
-  // if(rememberme === false)
-  // {
-  //   localStorage.removeItem('email')
-  // }
   return (
     <form className="space-y-6" onSubmit={onSubmit}>
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -75,8 +80,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
                     name="remember_me" 
                     type="checkbox" 
                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                    checked={rememberme}
-                    onChange={(e) => setRememberme(e.target.checked)}/>
+                    checked={rememberMie}
+                    onChange={(e) => setRemembermee(e.target.checked)}/>
                     <label className="ml-2 block text-sm text-gray-900">
                       Remember me
                     </label>

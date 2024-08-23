@@ -19,12 +19,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     return !!localStorage.getItem("authToken");
   });
   //set user here !!!!! so you can show the profile one !!!
-  const login = async({ email, password,rememberme } : loginArr ) : Promise<loginArr[]> => {
-    if(email && rememberme)
+  const login = async({ email, password, rememberme } : loginArr ) : Promise<loginArr[]> => {
+    if(email)
     {
-      localStorage.setItem("email", email);
-      localStorage.setItem("checked", rememberme.toString());
+      alert(rememberme);
+      localStorage.setItem("rememberedEmail", email);
     }
+
+
     try
     {
       const response = await fetch('http://localhost:8080/login', {
