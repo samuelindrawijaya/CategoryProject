@@ -64,12 +64,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const refreshToken = () => {
-
-  }
-  const remember_me = () => { 
-
-  }
   const logout = () => {
     setIsAuthenticated(false);
     localStorage.removeItem("authToken");
